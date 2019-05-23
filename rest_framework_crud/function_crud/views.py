@@ -15,7 +15,7 @@ def dataView(request):
 
     elif request.method == 'POST':
         json_parser=JSONParser()
-        data=json_parser.parse(request)
+        data=json_parser.parse(request.data)
         serialized=FunctionCrudSerializer(data=data)
         if serialized.is_valid():
             serialized.save()
@@ -33,7 +33,7 @@ def dataDetailsView(request,id):
         return JsonResponse(serializer.data)
     elif request.method =='PUT':
         parser=JSONParser()
-        data=parser.parse(request)
+        data=parser.parse(request.data)
         update_serializer=FunctionCrudSerializer(instance,data=data)
         if update_serializer.is_valid():
             update_serializer.save()
